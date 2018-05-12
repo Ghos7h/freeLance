@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html ng-app="MyApp">
+	<head>
+		<base href="/">
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>Free App</title>
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<!-- jQuery library -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<!-- Latest compiled JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="">
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular-route.min.js"></script>
+		<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+		<!-- services -->
+		<script type="text/javascript" src="app/services/numberService.js"></script>
+		<!-- controller -->
+		<script type="text/javascript" src="app/controllers/mainCtrl.js"></script>
+		<!-- app -->
+		<script type="text/javascript" src="app/app.js"></script>
+	</head>
+	
+	<body ng-controller="mainCtroller as main">
+		<header>
+			<div class="navbar navbar-default">
+				<div class="container">
+					<div class="navbar-header">
+						<a href="/" class="navbar-brand"><span class="glyphicon glyphicon-book" style="margin-right: 8px;"></span>Free App</a>
+					</div>
+					
+				</div>
+			</div>
+		</header>
+		<main class="container">
+			<div class="panel panel-default">
+				<div  class="panel-body">
+					
+					<form class="form-horizontal">
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="number" style="    margin-left: 180px;">Enter Number:</label>
+							<div class="col-sm-4">
+								<input type="number" class="form-control" id="email" placeholder="Enter number" style="width: 350px" ng-model="main.value">
+								<p  ng-if="main.error" style="color: red">Invalid entry.</p>
+							</div>
+							<div class="col-sm-2">
+								<button type="submit" class="btn btn-default" ng-click="main.getNumber()">Submit</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div ng-if="main.result!=undefined &amp;&amp; main.result!='' &amp;&amp; main.result!=null">
+				<h1>Result : </h1>
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Country</th>
+							<th>Code</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="x in main.result">
+							<td>{{ x.Name }}</td>
+							<td>{{ x.Country }}</td>
+							<td>codeXYz</td>
+						</tr>
+						
+					</tbody>
+				</table>
+				<button type="submit" class="btn btn-primary" ng-click="main.result=''">Clear</button>
+			</div>
+			<div ng-if="main.result==null || main.result==undefined || main.result==''">
+				<div class="panel panel-success">
+					<div class="panel-heading" style="text-align: center;"><h1 >Welcome To Free App ..</h1></div>
+				</div>
+				
+			</div>
+		</main>
+	</body>
+</html>
